@@ -33,6 +33,7 @@ int main()
             "\t3\tDecrease size\n"
             "\t4\tUpdate at index\n"
             "\t5\tDelete at index\n"
+            "\t6\tInsert at index\n"
             ">> "
         );
         scanf_s("%d", &input);
@@ -103,6 +104,25 @@ int main()
 
             arrSize--;
             arr = (int *) realloc(arr, sizeof(int) * arrSize);
+
+            break;
+        case 6:
+            printf("Index: ");
+            scanf_s("%d", &input);
+
+            if ((index >= arrSize) || (index < 0))
+            {
+                printf("Invalid index\n");
+                break;
+            }
+
+            arrSize++;
+            arr = (int *) realloc(arr, sizeof(int) * arrSize);
+
+            for (int i = (arrSize - 1); i >= input; i--)
+                memmove_s(arr + i, sizeof(arr + i), arr + (i - 1), sizeof(arr + (i - 1)));
+
+            *(arr + input) = 0;
 
             break;
         }
